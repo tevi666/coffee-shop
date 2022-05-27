@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
-    <HeroView />
-    <FooterComponent />
+    <router-view></router-view>
+
+    <footer-component />
   </div>
 </template>
 
@@ -9,9 +10,8 @@
 import HeroView from "@/views/HeroView.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 export default {
-  components: { HeroView , FooterComponent},
-
+  components: { HeroView, FooterComponent },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>
