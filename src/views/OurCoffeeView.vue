@@ -7,7 +7,7 @@
             <navbar-component />
           </div>
         </div>
-        <h1 class="title-big">Our Coffee</h1>
+        <header-title-component :title="headerTitle" />
       </div>
     </div>
     <section class="shop">
@@ -70,40 +70,12 @@
           <div class="col-lg-10 offset-lg-1">
             <div class="shop__wrapper">
               <product-card
-              classItem="shop__item"
-                :name="coffee[0].name"
-                :price="coffee[0].price"
-                :image="coffee[0].image"
-              />
-              <product-card
-              classItem="shop__item"
-                :name="coffee[1].name"
-                :price="coffee[1].price"
-                :image="coffee[1].image"
-              />
-              <product-card
-              classItem="shop__item"
-                :name="coffee[2].name"
-                :price="coffee[2].price"
-                :image="coffee[2].image"
-              />
-              <product-card
-              classItem="shop__item"
-                :name="coffee[3].name"
-                :price="coffee[3].price"
-                :image="coffee[3].image"
-              />
-              <product-card
-              classItem="shop__item"
-                :name="coffee[4].name"
-                :price="coffee[4].price"
-                :image="coffee[4].image"
-              />
-              <product-card
-              classItem="shop__item"
-                :name="coffee[5].name"
-                :price="coffee[5].price"
-                :image="coffee[5].image"
+                v-for="coffeeItem in coffee"
+                :key="coffeeItem.id"
+                classItem="shop__item"
+                :name="coffeeItem.name"
+                :price="coffeeItem.price"
+                :image="coffeeItem.image"
               />
             </div>
           </div>
@@ -116,48 +88,51 @@
 <script>
 import NavbarComponent from "@/components/NavbarComponent.vue";
 import ProductCard from "@/components/ProductCard.vue";
+import HeaderTitleComponent from "@/components/HeaderTitleComponent.vue";
+import { v4 as uuidv4 } from "uuid";
 export default {
-  components: { NavbarComponent, ProductCard },
+  components: { NavbarComponent, ProductCard, HeaderTitleComponent },
   data() {
     return {
+      headerTitle: "Our Coffee",
       coffee: [
         {
-          id: 0,
+          id: uuidv4(),
           image: "coffee-1.jpg",
           name: "Solimo Coffee Beans 2kg",
           country: "Brazil",
           price: 10.73,
         },
         {
-          id: 1,
+          id: uuidv4(),
           image: "coffee-2.jpg",
           name: "Presto Coffee Beans 1kg",
           country: "Ethiopia",
           price: 15.99,
         },
         {
-          id: 2,
+          id: uuidv4(),
           image: "coffee-3.jpg",
           name: "AROMISTICO Coffee 1kg",
           country: "Colombia",
           price: 6.99,
         },
         {
-          id: 3,
+          id: uuidv4(),
           image: "coffee-1.jpg",
           name: "Solimo Coffee Beans 2kg",
           country: "Guatemala",
           price: 10.73,
         },
         {
-          id: 4,
+          id: uuidv4(),
           image: "coffee-2.jpg",
           name: "Presto Coffee Beans 1kg",
           country: "India",
           price: 15.99,
         },
         {
-          id: 5,
+          id: uuidv4(),
           image: "coffee-3.jpg",
           name: "AROMISTICO Coffee 1kg",
           country: "Tanzania",

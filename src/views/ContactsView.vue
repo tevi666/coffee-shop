@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <nav-bar-component />
+            <navbar-component />
           </div>
         </div>
         <h1 class="title-big">Contact us</h1>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import NavbarComponent from "@/components/NavbarComponent.vue";
+import NavbarComponent from "@/components/NavbarComponent";
 export default {
   components: { NavbarComponent },
 };
