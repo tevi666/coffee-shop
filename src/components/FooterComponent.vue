@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <ul class="footer d-flex flex-wrap">
-            <nav-item :link="links.header.link" classItem="footer__item">
+            <nav-item :link="links.footer.link" classItem="footer__item">
               <img
-                :src="require(`@/assets/logo/${links.header.icon}`)"
+                :src="require(`@/assets/logo/${links.footer.icon}`)"
                 alt="logo"
               />
             </nav-item>
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       links: {
-        header: {
+        footer: {
           id: 0,
           link: "/",
           icon: "Logo_black.svg",
