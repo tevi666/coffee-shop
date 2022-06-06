@@ -22,9 +22,10 @@
             <a
               href="./coffeepage.html"
               class="preview__btn"
-              @click.prevent="smothScroll"
-              >More</a
+              @click.prevent="smoothScroll"
             >
+              More
+            </a>
           </div>
         </div>
       </div>
@@ -69,9 +70,7 @@
                 v-for="bestseller in bestsellers"
                 :key="bestseller.id"
                 classItem="best__item"
-                :name="bestseller.name"
-                :price="bestseller.price"
-                :image="bestseller.image"
+                :card="bestseller"
               />
             </div>
           </div>
@@ -94,7 +93,7 @@ export default {
     };
   },
   methods: {
-    smothScroll() {
+    smoothScroll() {
       scrollIntoView(this.$refs.ourBest, {
         behavior: "smooth",
         block: "start",

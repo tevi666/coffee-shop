@@ -1,13 +1,16 @@
 <template>
   <main>
-    <div class="banner itempage-banner">
+    <div
+      class="banner"
+      :class="pageName === 'coffee' ? 'coffepage-banner' : 'goodspage-banner'"
+    >
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <navbar-component />
           </div>
         </div>
-        <h1 class="title-big">Our Coffee</h1>
+        <header-title-component :title="card.name" />
       </div>
     </div>
 
@@ -16,9 +19,8 @@
         <div class="row">
           <div class="col-lg-5 offset-1">
             <img
-              class="shop__girl"
-              src="@/assets/img/coffee_item.jpg"
-              alt="coffee_item"
+              :src="require(`@/assets/img/${card.image}`)"
+              :alt="card.image"
             />
           </div>
           <div class="col-lg-4">
@@ -40,8 +42,10 @@
               nisi ut aliquip ex ea commodo consequat.
             </div>
             <div class="shop__point">
-              <span>Price:</span>
-              <span class="shop__point-price">16.99$</span>
+              <span>Price: </span>
+              <span class="shop__point-price">{{
+                card.price | addCurrency
+              }}</span>
             </div>
           </div>
         </div>
@@ -51,8 +55,19 @@
 </template>
 
 <script>
-import NavbarComponent from "@/components/NavbarComponent.vue";
+import NavbarComponent from "@/components/NavbarComponent";
+import HeaderTitleComponent from "@/components/HeaderTitleComponent.vue";
 export default {
-  components: { NavbarComponent },
+  components: { NavbarComponent, HeaderTitleComponent },
+  computed: {
+    pageName() {
+      return this.$route.name;
+    },
+    card() {
+      const pageGetter =
+        this.pageName === "coffee" ? "getCoffeeById" : "getGoodsById";
+      return this.$store.getters[pageGetter](this.$route.params.id);
+    },
+  },
 };
 </script>
