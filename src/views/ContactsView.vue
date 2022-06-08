@@ -7,7 +7,7 @@
             <navbar-component />
           </div>
         </div>
-        <h1 class="title-big">Contact us</h1>
+        <header-title-component :title="headerTitle" />
       </div>
     </div>
     <section class="contacts">
@@ -21,7 +21,7 @@
               alt="Beans logo"
             />
 
-            <form action="#" class="mt-5" @submit.prevent="submit($event)">
+            <form action="/" class="mt-5" @submit.prevent="submit($event)">
               <div class="form-group row">
                 <div class="col col-12 col-sm-3 d-flex align-items-start">
                   <label for="name-input" class="mb-0">
@@ -80,7 +80,7 @@
               </div>
 
               <div class="form-group row textarea">
-                <div class="col col-12 d-flex justify-content-start">
+                <div class="col col-12 d-flex justify-content-center">
                   <label for="pmessage" class="mb-3 mt-3 text-center">
                     Your message
                     <span style="color: red">*</span>
@@ -118,17 +118,13 @@
 
 <script>
 import NavbarComponent from "@/components/NavbarComponent";
-
+import HeaderTitleComponent from "@/components/HeaderTitleComponent.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email, maxLength } from "@vuelidate/validators";
 import { helpers } from "@vuelidate/validators";
-import { minLength } from "../validators/minLength";
-
+import { minLength } from "@/validators/minLength";
 export default {
-  components: { NavbarComponent },
-  setup() {
-    return { v$: useVuelidate() };
-  },
+  components: { NavbarComponent, HeaderTitleComponent },
   data() {
     return {
       headerTitle: "Contact us",
@@ -137,6 +133,28 @@ export default {
       phone: "",
       message: "",
     };
+  },
+  methods: {
+    async submit() {
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) return;
+      const message = {
+        userName: this.userName,
+        email: this.email,
+        phone: this.phone,
+        message: this.message,
+      };
+      fetch("http://localhost:3000/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+      });
+    },
+  },
+  setup() {
+    return { v$: useVuelidate() };
   },
   validations() {
     return {
@@ -149,19 +167,6 @@ export default {
         minLength: helpers.withMessage("this value min 5", minLength),
       },
     };
-  },
-  methods: {
-    async submit() {
-      const isFormCorrect = await this.v$.$validate();
-      if (!isFormCorrect) return;
-
-      console.log({
-        name: this.userName,
-        email: this.email,
-        phone: this.phone,
-        message: this.message,
-      });
-    },
   },
 };
 </script>
