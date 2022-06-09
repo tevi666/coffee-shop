@@ -100,17 +100,17 @@ export default {
       });
     },
   },
-  computed: {
-    bestsellers() {
-      return this.$store.getters["getBestsellers"];
-    },
-  },
   mounted() {
     fetch("http://localhost:3000/bestsellers")
       .then((res) => res.json())
       .then((data) => {
         this.$store.dispatch("setBestsellersData", data);
       });
+  },
+  computed: {
+    bestsellers() {
+      return this.$store.getters["getBestsellers"];
+    },
   },
 };
 </script>

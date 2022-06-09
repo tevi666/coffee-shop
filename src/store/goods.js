@@ -56,16 +56,16 @@ const goods = {
             };
         },
     },
+    mutations: {
+        setGoodsData(state, data) {
+            state.goods = data;
+        },
+    },
     actions: {
         setGoodsData({
             commit
         }, data) {
             commit('setGoodsData', data);
-        },
-    },
-    mutations: {
-        setGoodsData(state, data) {
-            state.goods = data;
         },
     },
 };

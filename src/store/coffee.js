@@ -1,50 +1,20 @@
 const coffee = {
     state: {
-        coffee: null,
-        // coffee: [
-        //     {
-        //         id: 0,
-        //         image: 'coffee-1.jpg',
-        //         name: 'Solimo Coffee Beans 2kg',
-        //         country: 'Brazil',
-        //         price: 10.73,
-        //     },
-        //     {
-        //         id: 1,
-        //         image: 'coffee-2.jpg',
-        //         name: 'Presto Coffee Beans 1kg',
-        //         country: 'Ethiopia',
-        //         price: 15.99,
-        //     },
-        //     {
-        //         id: 2,
-        //         image: 'coffee-3.jpg',
-        //         name: 'AROMISTICO Coffee 1kg',
-        //         country: 'Colombia',
-        //         price: 6.99,
-        //     },
-        //     {
-        //         id: 3,
-        //         image: 'coffee-1.jpg',
-        //         name: 'Solimo Coffee Beans 2kg',
-        //         country: 'Guatemala',
-        //         price: 10.73,
-        //     },
-        //     {
-        //         id: 4,
-        //         image: 'coffee-2.jpg',
-        //         name: 'Presto Coffee Beans 1kg',
-        //         country: 'India',
-        //         price: 15.99,
-        //     },
-        //     {
-        //         id: 5,
-        //         image: 'coffee-3.jpg',
-        //         name: 'AROMISTICO Coffee 1kg',
-        //         country: 'Tanzania',
-        //         price: 6.99,
-        //     },
-        // ],
+        // coffee: null,
+        coffee: [],
+        searchValue: '',
+        sortValue: '',
+    },
+    mutations: {
+        setCoffeeData(state, data) {
+            state.coffee = data;
+        },
+        setSearchValue(state, value) {
+            state.searchValue = value;
+        },
+        setSortValue(state, value) {
+            state.sortValue = value;
+        },
     },
     actions: {
         setCoffeeData({
@@ -52,20 +22,35 @@ const coffee = {
         }, data) {
             commit('setCoffeeData', data);
         },
-    },
-    mutations: {
-        setCoffeeData(state, data) {
-            state.coffee = data;
+        setSearchValue({
+            commit
+        }, value) {
+            commit('setSearchValue', value);
         },
+        setSortValue({
+            commit
+        }, value) {
+            commit('setSortValue', value);
+        }
     },
     getters: {
         getCoffee(state) {
             return state.coffee;
+            // return state.coffee.filter(item => item.name
+            //     .toLowerCase()
+            //     .includes(state.searchValue.toLowerCase())
+            // ).filter(item => item.country
+            //     .toLowerCase()
+            //     .includes(state.sortValue.toLowerCase())
+            // );
         },
         getCoffeeById(state) {
             return (id) => {
                 return state.coffee.find((card) => card.id === +id);
             };
+        },
+        getSearchValue(state) {
+            return state.searchValue;
         },
     },
 };
